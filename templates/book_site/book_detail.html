@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %} Список книг {% endblock %}
+{% block content %}
+<div>
+    <h1> {{ book.name }} </h1>
+    <p> {{ book.description }} </p>
+    <img src="{{ book.book_image.url }}" alt="Обложка">
+    <h3>{{ book.release_date }}</h3>
+    <h2>{{ book.author }}</h2>
+    <h2>{{ book.genre }}</h2>
+</div>
+
+{% endblock %}
