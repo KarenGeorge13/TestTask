@@ -24,4 +24,4 @@ urlpatterns = [
     path('', include('book_site.urls')),
     path('api-auth', include('rest_framework.urls')),
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

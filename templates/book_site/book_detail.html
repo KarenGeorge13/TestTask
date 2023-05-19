@@ -1,13 +1,45 @@
 {% extends "base.html" %}
-{% block title %} Список книг {% endblock %}
+{% load rest_framework %}
+{% block title %} {{ book.name.value }} {% endblock %}
 {% block content %}
-<div>
-    <h1> {{ book.name }} </h1>
-    <p> {{ book.description }} </p>
-    <img src="{{ book.book_image.url }}" alt="Обложка">
-    <h3>{{ book.release_date }}</h3>
-    <h2>{{ book.author }}</h2>
-    <h2>{{ book.genre }}</h2>
+
+
+<div class="container">
+    <div class="form-group">
+        <label class="sr-only">Название: {{ book.name.value }}</label>
+    </div>
+    <div class="form-group">
+        <label class="sr-only">Описание: {{ book.description.value }}</label>
+    </div>
+    <div class="form-group">
+        <label class="sr-only">Дата выпуска: {{ book.release_date.value }}</label>
+    </div>
+    <div class="form-group">
+        <label class="sr-only">Жанр: {{ genre.name.value }}</label>
+    </div>
+    <div class="form-group">
+        <label class="sr-only">Обложка</label>
+    </div>
+    <div class="form-group">
+        <img src="{{ book.book_image.value }}"  alt="Обложка книги" height="250px">
+    </div>
+    <div class="form-group">
+        <label class="sr-only">Данные об авторе</label>
+    </div>
+    <div class="form-group">
+        <label class="sr-only">Автор: {{ author.full_name.value }}</label>
+    </div>
+    <div class="form-group">
+        <label class="sr-only">Изображение автора</label>
+    </div>
+    <div class="form-group">
+        <img src="{{ author.author_image.value }}"  alt="Изображение автора" height="250px">
+    </div>
+    <div class="form-group">
+        <label class="sr-only">Дата рождения: {{ author.birth_date.value }}</label>
+    </div>
+    <a class="btn btn-primary" href="{% url 'update_book' pk=book.id.value %}">Изменить</a>
 </div>
+
 
 {% endblock %}

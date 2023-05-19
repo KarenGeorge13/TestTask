@@ -7,8 +7,8 @@ class Book(models.Model):
     description = models.TextField(verbose_name='Описание')
     book_image = models.ImageField(verbose_name='Изображение книги', upload_to='images/', null=True, blank=True)
     release_date = models.DateField(verbose_name='Дата выпуска')
-    author = models.ForeignKey('Author', on_delete=models.CASCADE)
-    genre = models.ForeignKey('BookGenre', on_delete=models.CASCADE)
+    author = models.ForeignKey('Author', on_delete=models.CASCADE, verbose_name='Автор')
+    genre = models.ForeignKey('BookGenre', on_delete=models.CASCADE, verbose_name='Жанр')
 
     def __str__(self):
         return str(self.name)

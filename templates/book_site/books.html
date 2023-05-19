@@ -1,10 +1,47 @@
 {% extends "base.html" %}
+{% load rest_framework %}
 {% block title %} Список книг {% endblock %}
 {% block content %}
-
+<div class="container">
+<form action="{% url 'books' %}" data-method="GET" novalidate="">
+    {% csrf_token %}
+    {% render_form search %}
+    <button type="submit" class="btn btn-warning">Фильтровать</button>
+</form>
+<form class="form-vertical" action="{% url 'books' %}" data-method="GET" novalidate="">
+    {% csrf_token %}
+    {% render_form sort %}
+    <button type="submit" class="btn btn-warning">Sort</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Название</th>
+            <th scope="col">Автор</th>
+            <th scope="col">Жанр</th>
+            <th scope="col">Дата выпуска</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
     {% for book in books_list %}
-        <h1> {{ book.name }} </h1>
-        
+        <tr>
+            <td><a href="{% url 'book_detail' pk=book.id %}">{{ book.name }}</a></td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.genre }}</td>
+            <td>{{ book.release_date }}</td>
+            <td>
+                <form action="{% url 'book_delete' pk=book.id %}" data-method="DELETE" novalidate="">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">DELETE</button>
+                </form>
+            </td>
+        </tr>
     {% endfor %}
+    </tbody>
+</table>
+    <a class="btn btn-primary" href="{% url 'add_book' %}">Добавить книгу</a>
+</div>
+
 
 {% endblock %}

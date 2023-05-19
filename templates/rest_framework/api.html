@@ -1,0 +1,6 @@
+{% extends "rest_framework/base.html" %}
+{% block branding %}
+    <a class='navbar-brand' href='{% url 'books' %}'>Список книг</a>
+    <a class='navbar-brand' href='{% url 'authors' %}'>Авторы</a>
+    <a class='navbar-brand' href='{% url 'genres' %}'>Жанры</a>
+{% endblock %}

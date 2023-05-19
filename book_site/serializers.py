@@ -1,3 +1,5 @@
+from abc import ABC
+
 from rest_framework import serializers
 from book_site.models import Book, Author, BookGenre
 from django.contrib.auth.models import User
@@ -10,6 +12,7 @@ class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ['id', 'name', 'description', 'book_image', 'release_date', 'author', 'genre']
+
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -29,11 +32,19 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create_user(
-            username = validated_data['username'],
-            password = validated_data['password']
+            username=validated_data['username'],
+            password=validated_data['password']
         )
         return user
 
     class Meta:
         model = User
         fields = ['username', 'password']
+
+
+class SearchSerializer(serializers.Serializer):
+    author = serializers.CharField()
+    genre = serializers.CharField()
+
+class SortSerializer(serializers.Serializer):
+    ascending = serializers.BooleanField()
